@@ -1,11 +1,13 @@
 #include "Game.hpp"
 #include "textureManager.hpp"
 #include "GameObject.hpp"
+#include "Map.hpp"
 
 //implementation
 
 GameObject * player;
 GameObject * enemy;
+Map * map;
 
 SDL_Renderer * Game::renderer = nullptr;
 
@@ -18,7 +20,7 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
     {
         flags = SDL_WINDOW_FULLSCREEN;
     }
-    SDL_Init(SDL_INIT_EVERYTHING);
+    if(SDL_Init(SDL_INIT_EVERYTHING) == 0){
     
     window = SDL_CreateWindow(title,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,width,height,flags);
     if(window == NULL){
@@ -34,9 +36,11 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
         isRunning = false;
     }
     isRunning = true;
+    }
     
+    map = new Map();
     player = new GameObject("/Users/Arthur/workspace/BattleShips/graphics/player.png",0,0);
-    enemy = new GameObject("/Users/Arthur/workspace/BattleShips/graphics/enemy.png",300,300);
+    enemy = new GameObject("/Users/Arthur/workspace/BattleShips/graphics/enemy.png",90,90);
     
 }
 
@@ -49,6 +53,7 @@ void Game::update()
 void Game::render()
 {
     SDL_RenderClear(renderer);
+    map->DrawMap();
     player->Render();
     enemy->Render();
     SDL_RenderPresent(renderer);

@@ -20,13 +20,13 @@ void GameObject::Update()
 {
     
     
-    srcRect.w = 30;
-    srcRect.h = 30;
+    srcRect.w = 32;
+    srcRect.h = 32;
     srcRect.x = 0;
     srcRect.y = 0;
     
     destRect.x = xpos;
-    destRect.y = ypos+600;
+    destRect.y = ypos;
     destRect.w = srcRect.w *2;
     destRect.h = srcRect.h *2;
     

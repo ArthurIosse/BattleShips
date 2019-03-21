@@ -1,7 +1,7 @@
 #include "Game.hpp"
 
-#define W 600
-#define H 600
+#define W 800
+#define H 640
 
 Game * game = nullptr;
 
