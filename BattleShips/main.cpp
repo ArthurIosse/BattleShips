@@ -35,6 +35,6 @@ int main(int argc, const char * argv[]) {
     }
     
     game->clean();
-    //delete(game);
+    //delete[] game;
     return 0;
 }

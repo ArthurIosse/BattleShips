@@ -26,9 +26,9 @@ int lvl1[20][25] =
 
 Map::Map()
 {
-    dirt = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/graphics/dirt.png");
-    water = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/graphics/water.png");
-    grass = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/graphics/grass.png");
+    dirt = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/dirt.png");
+    water = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/water.png");
+    grass = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/grass.png");
     
     LoadMap(lvl1);
     

@@ -39,8 +39,8 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
     }
     
     map = new Map();
-    player = new GameObject("/Users/Arthur/workspace/BattleShips/graphics/player.png",0,0);
-    enemy = new GameObject("/Users/Arthur/workspace/BattleShips/graphics/enemy.png",90,90);
+    player = new GameObject("/Users/Arthur/workspace/BattleShips/assets/player.png",0,0);
+    enemy = new GameObject("/Users/Arthur/workspace/BattleShips/assets/enemy.png",90,90);
     
 }
 
