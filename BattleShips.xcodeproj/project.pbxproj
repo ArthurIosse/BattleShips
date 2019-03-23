@@ -37,6 +37,7 @@
 		0412C06022419C6A00F5E9D3 /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		0412C0622242C9FE00F5E9D3 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.4/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 		0412C0642245991600F5E9D3 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = SOURCE_ROOT; };
+		0412C0652246A39500F5E9D3 /* ECS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECS.h; sourceTree = "<group>"; };
 		041492102240391900C2BB5D /* BattleShips */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BattleShips; sourceTree = BUILT_PRODUCTS_DIR; };
 		041492132240391900C2BB5D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0414921B22403A0D00C2BB5D /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.8/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 				0412C05D2241691800F5E9D3 /* GameObject.hpp */,
 				0412C05F22419C6A00F5E9D3 /* Map.cpp */,
 				0412C06022419C6A00F5E9D3 /* Map.hpp */,
+				0412C0652246A39500F5E9D3 /* ECS.h */,
 			);
 			path = BattleShips;
 			sourceTree = "<group>";

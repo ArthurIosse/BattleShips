@@ -18,6 +18,8 @@ int main(int argc, const char * argv[]) {
     
     game->init("BattleShips",W, H, false);
     
+    
+    
     while(game->running())
     {
         frameStart = SDL_GetTicks();

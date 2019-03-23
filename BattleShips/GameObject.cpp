@@ -7,12 +7,28 @@ GameObject::GameObject(const char * texturesheet,int x,int y)
     
     objTexture = textureManager::LoadTexture(texturesheet);
     
-    xpos = x;
-    ypos = y;
+    xpos = x * 32;
+    ypos = y * 32;
 }
 
 GameObject::~GameObject()
 {
+    
+}
+
+void GameObject::ChangeX(bool x)
+{
+    if(x)
+    xpos += 32;
+    else
+        xpos -= 32;
+}
+void GameObject::ChangeY(bool y)
+{
+    if(y)
+    ypos += 32;
+    else
+        ypos -= 32;
     
 }
 
@@ -27,8 +43,8 @@ void GameObject::Update()
     
     destRect.x = xpos;
     destRect.y = ypos;
-    destRect.w = srcRect.w *2;
-    destRect.h = srcRect.h *2;
+    destRect.w = srcRect.w ;
+    destRect.h = srcRect.h ;
     
 }
 

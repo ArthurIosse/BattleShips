@@ -3,10 +3,34 @@
 #include "GameObject.hpp"
 #include "Map.hpp"
 
+int field[20][25] =
+{{1,21,22,23,24,25,26,27,28,29,30,1,2,1,1,1,1,1,1,1,1,1,1,1,1},
+    {11,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {12,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {13,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {14,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {15,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {16,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {17,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {18,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {19,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {20,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,44,44,44,44,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,43,43,43,1,41,1,41,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,43,43,43,1,41,1,41,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,42,42,1,42,42,1,42,42,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+};
+
+
 //implementation
 
 GameObject * player;
-GameObject * enemy;
+//GameObject * enemy;
 Map * map;
 
 SDL_Renderer * Game::renderer = nullptr;
@@ -38,16 +62,17 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
     isRunning = true;
     }
     
-    map = new Map();
-    player = new GameObject("/Users/Arthur/workspace/BattleShips/assets/player.png",0,0);
-    enemy = new GameObject("/Users/Arthur/workspace/BattleShips/assets/enemy.png",90,90);
+    map = new Map(field);
+    player = new GameObject("/Users/Arthur/workspace/BattleShips/assets/player.png",1,1);
+    //enemy = new GameObject("/Users/Arthur/workspace/BattleShips/assets/enemy.png",14,1);
     
 }
 
 void Game::update()
 {
     player->Update();
-    enemy->Update();
+    map->LoadMap(field);
+    //enemy->Update();
 }
 
 void Game::render()
@@ -55,7 +80,7 @@ void Game::render()
     SDL_RenderClear(renderer);
     map->DrawMap();
     player->Render();
-    enemy->Render();
+    //enemy->Render();
     SDL_RenderPresent(renderer);
 }
 
@@ -64,6 +89,27 @@ void Game::handleEvent()
     SDL_Event event;
     
     SDL_PollEvent(&event);
+    
+    if(event.type == SDL_KEYDOWN)
+    {
+        switch(event.key.keysym.sym){
+    case SDLK_a: player->ChangeX(false);
+        break;
+    case SDLK_d: player->ChangeX(true);
+        break;
+    case SDLK_w: player->ChangeY(false);
+        break;
+    case SDLK_s: player->ChangeY(true);
+        break;
+    case SDLK_SPACE: if(field[player->ypos/32][player->xpos/32] == 44)
+                field[player->ypos/32][player->xpos/32] = 44;
+            
+                break;
+        }
+    }
+    
+    if(event.type == SDL_KEYUP)
+    {}
     
     switch(event.type){
         case SDL_QUIT: isRunning = false; break;

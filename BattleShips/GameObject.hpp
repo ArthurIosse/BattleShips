@@ -10,11 +10,15 @@ public:
     
     void Update();
     void Render();
-    
-private:
+    void ChangeX(bool x);
+    void ChangeY(bool y);
     
     int xpos;
     int ypos;
+    
+private:
+    
+    
     
     SDL_Texture * objTexture;
     SDL_Rect srcRect, destRect;
