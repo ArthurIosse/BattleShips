@@ -36,6 +36,16 @@ GameObject * ship12;
 GameObject * ship13;
 GameObject * ship14;
 
+GameObject * ship21;
+GameObject * ship22;
+GameObject * ship23;
+
+GameObject * ship31;
+GameObject * ship32;
+
+GameObject * ship41;
+
+
 GameObject * enemy = NULL;
 Map * map;
 
@@ -74,6 +84,8 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
     ship12 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 3, 12);
     ship13 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 5, 12);
     ship14 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 7, 12);
+    
+    ship21 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 1, 14);
     //enemy = new GameObject("/Users/Arthur/workspace/BattleShips/assets/enemy.png",14,1);
     
 }
@@ -85,6 +97,7 @@ void Game::update()
     ship12->Update();
     ship13->Update();
     ship14->Update();
+    ship21->Update();
     //enemy->Update();
 }
 
@@ -97,6 +110,7 @@ void Game::render()
     ship12->Render();
     ship13->Render();
     ship14->Render();
+    ship21->Render();
     player->Render();
     //enemy->Render();
     SDL_RenderPresent(renderer);
