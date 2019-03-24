@@ -16,13 +16,13 @@ int field[20][25] =
     {19,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
     {20,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    {1,44,44,44,44,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    {1,43,43,43,1,41,1,41,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    {1,43,43,43,1,41,1,41,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    {1,42,42,1,42,42,1,42,42,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
 
@@ -30,7 +30,13 @@ int field[20][25] =
 //implementation
 
 GameObject * player;
-//GameObject * enemy;
+
+GameObject * ship11;
+GameObject * ship12;
+GameObject * ship13;
+GameObject * ship14;
+
+GameObject * enemy = NULL;
 Map * map;
 
 SDL_Renderer * Game::renderer = nullptr;
@@ -64,6 +70,10 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
     
     map = new Map(field);
     player = new GameObject("/Users/Arthur/workspace/BattleShips/assets/player.png",1,1);
+    ship11 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 1, 12);
+    ship12 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 3, 12);
+    ship13 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 5, 12);
+    ship14 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 7, 12);
     //enemy = new GameObject("/Users/Arthur/workspace/BattleShips/assets/enemy.png",14,1);
     
 }
@@ -71,7 +81,10 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 void Game::update()
 {
     player->Update();
-    map->LoadMap(field);
+    ship11->Update();
+    ship12->Update();
+    ship13->Update();
+    ship14->Update();
     //enemy->Update();
 }
 
@@ -79,6 +92,11 @@ void Game::render()
 {
     SDL_RenderClear(renderer);
     map->DrawMap();
+    
+    ship11->Render();
+    ship12->Render();
+    ship13->Render();
+    ship14->Render();
     player->Render();
     //enemy->Render();
     SDL_RenderPresent(renderer);
@@ -101,9 +119,42 @@ void Game::handleEvent()
         break;
     case SDLK_s: player->ChangeY(true);
         break;
-    case SDLK_SPACE: if(field[player->ypos/32][player->xpos/32] == 44)
-                field[player->ypos/32][player->xpos/32] = 44;
-            
+            case SDLK_SPACE: if((player->xpos == ship11->xpos) && (player->ypos == ship11->ypos) && enemy == NULL){
+        enemy = player;
+        player = ship11;
+                field[player->ypos/32][player->xpos/32] = 0;
+            }
+                else if((player->xpos == ship12->xpos) && (player->ypos == ship12->ypos)&& enemy == NULL){
+                    enemy = player;
+                    player = ship12;
+                    field[player->ypos/32][player->xpos/32] = 0;
+                }
+                   else if((player->xpos == ship13->xpos) && (player->ypos == ship13->ypos)&& enemy == NULL){
+                        enemy = player;
+                        player = ship13;
+                       field[player->ypos/32][player->xpos/32] = 0;
+                    }
+                       else if((player->xpos == ship14->xpos) && (player->ypos == ship14->ypos)&& enemy == NULL){
+                            enemy = player;
+                            player = ship14;
+                           field[player->ypos/32][player->xpos/32] = 0;
+                          }
+        break;
+            case SDLK_p: if(enemy != NULL && field[player->ypos/32][player->xpos/32] == 0
+                            && (field[(player->ypos/32)+1][player->xpos/32] != 6)
+                            && (field[(player->ypos/32)+1][(player->xpos/32)-1] != 6)
+                            && (field[(player->ypos/32)+1][(player->xpos/32)+1] != 6)
+                            && (field[(player->ypos/32)+1][(player->xpos/32)-1] != 6)
+                            && (field[(player->ypos/32)-1][player->xpos/32] != 6)
+                            && (field[(player->ypos/32)-1][(player->xpos/32)-1] != 6)
+                            && (field[player->ypos/32][(player->xpos/32)+1] != 6)
+                            && (field[player->ypos/32][(player->xpos/32)-1] != 6)){
+                enemy->xpos = player->xpos;
+                enemy->ypos = player->ypos;
+                field[player->ypos/32][player->xpos/32] = 6;
+                player = enemy;
+                enemy = NULL;
+            }
                 break;
         }
     }

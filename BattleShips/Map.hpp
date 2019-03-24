@@ -39,10 +39,10 @@ private:
     SDL_Texture * h;
     SDL_Texture * i;
     SDL_Texture * j;
-    SDL_Texture * ship1;
-    SDL_Texture * ship2;
-    SDL_Texture * ship3;
-    SDL_Texture * ship4;
+//    SDL_Texture * ship1;
+//    SDL_Texture * ship2;
+//    SDL_Texture * ship3;
+//    SDL_Texture * ship4;
     
     
 

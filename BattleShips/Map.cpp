@@ -50,10 +50,12 @@ Map::Map(int field[20][25])
     h = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/Numbers/H.png");
     i = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/Numbers/I.png");
     j = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/Numbers/J.png");
-    ship1 = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/ship.png");
-    ship2 = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/ship.png");
-    ship3 = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/ship.png");
-    ship4 = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/ship.png");
+    
+    
+//    ship1 = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/ship.png");
+//    ship2 = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/ship.png");
+//    ship3 = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/ship.png");
+//    ship4 = textureManager::LoadTexture("/Users/Arthur/workspace/BattleShips/assets/ship.png");
     
     
     
@@ -165,14 +167,14 @@ void Map::DrawMap()
                 case 30:
                     textureManager::Draw(j, src, dest);
                     break;
-                case 41:
-                    textureManager::Draw(ship1, src, dest);
-                case 42:
-                    textureManager::Draw(ship2, src, dest);
-                case 43:
-                    textureManager::Draw(ship3, src, dest);
-                case 44:
-                    textureManager::Draw(ship4, src, dest);
+//                case 41:
+//                    textureManager::Draw(ship1, src, dest);
+//                case 42:
+//                    textureManager::Draw(ship2, src, dest);
+//                case 43:
+//                    textureManager::Draw(ship3, src, dest);
+//                case 44:
+//                    textureManager::Draw(ship4, src, dest);
                 default:
                     break;
             }
