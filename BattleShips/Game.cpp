@@ -114,6 +114,11 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
     ship321 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 5, 16);
     ship322 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 6, 16);
     ship323 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 7, 16);
+    
+    ship41 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 1, 18);
+    ship42 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 2, 18);
+    ship43 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 3, 18);
+    ship44 = new GameObject("/Users/Arthur/workspace/BattleShips/assets/ship.png", 4, 18);
  
     
 }
@@ -138,6 +143,10 @@ void Game::update()
     ship321->Update();
     ship322->Update();
     ship323->Update();
+    ship41->Update();
+    ship42->Update();
+    ship43->Update();
+    ship44->Update();
 }
 
 void Game::render()
@@ -161,6 +170,10 @@ void Game::render()
     ship321->Render();
     ship322->Render();
     ship323->Render();
+    ship41->Render();
+    ship42->Render();
+    ship43->Render();
+    ship44->Render();
     player->Render();
     SDL_RenderPresent(renderer);
 }
@@ -174,7 +187,8 @@ void Game::handleEvent()
     if(event.type == SDL_KEYDOWN)
     {
         switch(event.key.keysym.sym){
-    case SDLK_a: player->ChangeX(false);
+    case SDLK_a:
+                player->ChangeX(false);
                 if(player2)player2->ChangeX(false);
                 if(player3)player3->ChangeX(false);
                 if(player4)player4->ChangeX(false);
@@ -220,7 +234,8 @@ void Game::handleEvent()
                           }
                 
                 //1-Deck ships UNPRESS
-                       else if((enemy != NULL) && (player2 == NULL) && (player3 == NULL) && (field[player->ypos/32][player->xpos/32] == 0)
+                       else if((enemy != NULL) && (player2 == NULL) && (player3 == NULL) &&(player4==NULL)
+                               && (field[player->ypos/32][player->xpos/32] == 0)
                                && (field[(player->ypos/32)+1][ player->xpos/32]    != 6)
                                && (field[(player->ypos/32)+1][(player->xpos/32)+1] != 6)
                                && (field[(player->ypos/32)-1][(player->xpos/32)+1] != 6)
@@ -266,7 +281,8 @@ void Game::handleEvent()
                        }
                 
                 //2_deck ships UNPRESS
-    else if((enemy != NULL) && (player2 != NULL) && (player3 == NULL) && (field[player->ypos/32][player->xpos/32] == 0)
+    else if((enemy != NULL) && (player2 != NULL) && (player3 == NULL) && (player4 == NULL)
+            && (field[player->ypos/32][player->xpos/32] == 0)
             && (field[player2->ypos/32][player2->xpos/32] == 0)
             && (field[(player->ypos/32)+1][ player->xpos/32]    != 6)
             && (field[(player->ypos/32)+1][(player->xpos/32)+1] != 6)
@@ -296,7 +312,7 @@ void Game::handleEvent()
     }
           //3-Deck ships PRESS
     else if(((player->xpos == ship311->xpos) || (player->xpos == ship312->xpos) || (player->xpos == ship313->xpos))
-            && ((player->ypos == ship311->ypos) || (player->ypos == ship312->ypos) || (player->xpos == ship313->xpos))
+            && ((player->ypos == ship311->ypos) || (player->ypos == ship312->ypos) || (player->ypos == ship313->ypos))
             && enemy == NULL){
         enemy = player;
         player = ship311;
@@ -306,10 +322,23 @@ void Game::handleEvent()
         field[player2->ypos/32][player2->xpos/32] = 0;
         field[player3->ypos/32][player3->xpos/32] = 0;
     }
-                
+    else if(((player->xpos == ship321->xpos) || (player->xpos == ship322->xpos) || (player->xpos == ship323->xpos))
+            && ((player->ypos == ship321->ypos) || (player->ypos == ship322->ypos) || (player->ypos == ship323->ypos))
+            && enemy == NULL){
+        enemy = player;
+        player = ship321;
+        player2 = ship322;
+        player3 = ship323;
+        field[player->ypos/32][player->xpos/32] = 0;
+        field[player2->ypos/32][player2->xpos/32] = 0;
+        field[player3->ypos/32][player3->xpos/32] = 0;
+    }
+              
               //3-Deck ships UNPRESS
-    else if((enemy != NULL) && (player2 != NULL) && (player3 !=NULL) && (field[player->ypos/32][player->xpos/32] == 0)
+    else if((enemy != NULL) && (player2 != NULL) && (player3 !=NULL) && (player4 == NULL)
+            && (field[player->ypos/32][player->xpos/32] == 0)
             && (field[player2->ypos/32][player2->xpos/32] == 0)
+            && (field[player3->ypos/32][player3->xpos/32] == 0)
             && (field[(player->ypos/32)+1][ player->xpos/32]    != 6)
             && (field[(player->ypos/32)+1][(player->xpos/32)+1] != 6)
             && (field[(player->ypos/32)-1][(player->xpos/32)+1] != 6)
@@ -345,6 +374,78 @@ void Game::handleEvent()
         player = enemy;
         player2 = NULL;
         player3 = NULL;
+        enemy = NULL;
+    }
+                
+                //4-Deck ship PRESS
+    else if(((player->xpos == ship41->xpos) || (player->xpos == ship42->xpos) || (player->xpos == ship43->xpos)
+             ||(player->xpos == ship44->xpos))
+            && ((player->ypos == ship41->ypos) || (player->ypos == ship42->ypos) || (player->ypos == ship43->ypos)
+                || (player->ypos == ship43->ypos))
+            && enemy == NULL){
+        enemy = player;
+        player = ship41;
+        player2 = ship42;
+        player3 = ship43;
+        player4 = ship44;
+        field[player->ypos/32][player->xpos/32] = 0;
+        field[player2->ypos/32][player2->xpos/32] = 0;
+        field[player3->ypos/32][player3->xpos/32] = 0;
+        field[player4->ypos/32][player4->xpos/32] = 0;
+    }
+                
+                //4-Deck ship UNPRESS
+    else if((enemy != NULL) && (player2 != NULL) && (player3 !=NULL) && (player4 != NULL)
+            && (field[player->ypos/32][player->xpos/32] == 0)
+            && (field[player2->ypos/32][player2->xpos/32] == 0)
+            && (field[player3->ypos/32][player3->xpos/32] == 0)
+            && (field[player4->ypos/32][player4->xpos/32] == 0)
+            && (field[(player->ypos/32)+1][ player->xpos/32]    != 6)
+            && (field[(player->ypos/32)+1][(player->xpos/32)+1] != 6)
+            && (field[(player->ypos/32)-1][(player->xpos/32)+1] != 6)
+            && (field[(player->ypos/32)+1][(player->xpos/32)-1] != 6)
+            && (field[(player->ypos/32)-1][ player->xpos/32]    != 6)
+            && (field[(player->ypos/32)-1][(player->xpos/32)-1] != 6)
+            && (field[ player->ypos/32]   [(player->xpos/32)+1] != 6)
+            && (field[ player->ypos/32]   [(player->xpos/32)-1] != 6)
+            
+            && (field[(player2->ypos/32)+1][ player2->xpos/32]    != 6)
+            && (field[(player2->ypos/32)+1][(player2->xpos/32)+1] != 6)
+            && (field[(player2->ypos/32)-1][(player2->xpos/32)+1] != 6)
+            && (field[(player2->ypos/32)+1][(player2->xpos/32)-1] != 6)
+            && (field[(player2->ypos/32)-1][ player2->xpos/32]    != 6)
+            && (field[(player2->ypos/32)-1][(player2->xpos/32)-1] != 6)
+            && (field[ player2->ypos/32]   [(player2->xpos/32)+1] != 6)
+            && (field[ player2->ypos/32]   [(player2->xpos/32)-1] != 6)
+            
+            && (field[(player3->ypos/32)+1][ player3->xpos/32]    != 6)
+            && (field[(player3->ypos/32)+1][(player3->xpos/32)+1] != 6)
+            && (field[(player3->ypos/32)-1][(player3->xpos/32)+1] != 6)
+            && (field[(player3->ypos/32)+1][(player3->xpos/32)-1] != 6)
+            && (field[(player3->ypos/32)-1][ player3->xpos/32]    != 6)
+            && (field[(player3->ypos/32)-1][(player3->xpos/32)-1] != 6)
+            && (field[ player3->ypos/32]   [(player3->xpos/32)+1] != 6)
+            && (field[ player3->ypos/32]   [(player3->xpos/32)-1] != 6)
+            
+            && (field[(player4->ypos/32)+1][ player4->xpos/32]    != 6)
+            && (field[(player4->ypos/32)+1][(player4->xpos/32)+1] != 6)
+            && (field[(player4->ypos/32)-1][(player4->xpos/32)+1] != 6)
+            && (field[(player4->ypos/32)+1][(player4->xpos/32)-1] != 6)
+            && (field[(player4->ypos/32)-1][ player4->xpos/32]    != 6)
+            && (field[(player4->ypos/32)-1][(player4->xpos/32)-1] != 6)
+            && (field[ player4->ypos/32]   [(player4->xpos/32)+1] != 6)
+            && (field[ player4->ypos/32]   [(player4->xpos/32)-1] != 6)
+            ){
+        enemy->xpos = player->xpos;
+        enemy->ypos = player->ypos;
+        field[player->ypos/32][player->xpos/32] = 6;
+        field[player2->ypos/32][player2->xpos/32] = 6;
+        field[player3->ypos/32][player3->xpos/32] = 6;
+        field[player4->ypos/32][player4->xpos/32] = 6;
+        player = enemy;
+        player2 = NULL;
+        player3 = NULL;
+        player4 = NULL;
         enemy = NULL;
     }
                 break;

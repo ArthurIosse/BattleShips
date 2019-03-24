@@ -22,6 +22,7 @@ void GameObject::ChangeX(bool x)
     xpos += 32;
     else
         xpos -= 32;
+    
 }
 void GameObject::ChangeY(bool y)
 {
