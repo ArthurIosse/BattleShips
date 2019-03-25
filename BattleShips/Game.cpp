@@ -59,6 +59,7 @@ GameObject * ship43;
 GameObject * ship44;
 
 
+
 GameObject * enemy = NULL;
 Map * map;
 
@@ -448,6 +449,75 @@ void Game::handleEvent()
         player4 = NULL;
         enemy = NULL;
     }
+                break;
+        
+    case SDLK_f:
+        if(player2 == NULL)
+            break;
+                
+                if(player2 && !player3 && !player4 && !player->flipped)
+                {
+                    player2->xpos-=32;
+                    player2->ypos-=32;
+                    player->flipped = true;
+                    player2->flipped = true;
+                }
+               else if(player2 && !player3 && !player4 && player->flipped)
+                {
+                    player2->xpos+=32;
+                    player2->ypos+=32;
+                    player->flipped = false;
+                    player2->flipped = false;
+                }
+                
+        if(player3 && player4 == NULL && !player->flipped)
+        {
+            player3->xpos -=32;
+            player3->ypos-=32;
+            player->xpos+=32;
+            player->ypos+=32;
+            player->Flipped(true);
+            player2->Flipped(true);
+            player3->Flipped(true);
+        }
+            
+              else if(player3 && !player4 && player->flipped)
+                {
+                    player3->xpos +=32;
+                    player3->ypos+=32;
+                    player->xpos-=32;
+                    player->ypos-=32;
+                    player->Flipped(false);
+                    player2->Flipped(false);
+                    player3->Flipped(false);
+                }
+                if(player4 && !player->flipped)
+                {
+                    player3->xpos -=32;
+                    player3->ypos-=32;
+                    player4->xpos -=32*2;
+                    player4->ypos-=32*2;
+                    player->xpos+=32;
+                    player->ypos+=32;
+                    player->Flipped(true);
+                    player2->Flipped(true);
+                    player3->Flipped(true);
+                    player4->Flipped(true);
+                }
+                
+                else if(player4 && player->flipped)
+                {
+                    player3->xpos +=32;
+                    player3->ypos+=32;
+                    player4->xpos +=32*2;
+                    player4->ypos+=32*2;
+                    player->xpos-=32;
+                    player->ypos-=32;
+                    player->Flipped(false);
+                    player2->Flipped(false);
+                    player3->Flipped(false);
+                    player4->Flipped(false);
+                }
                 break;
         }
     }

@@ -12,9 +12,11 @@ public:
     void Render();
     void ChangeX(bool x);
     void ChangeY(bool y);
+    void Flipped(bool a);
     
     int xpos;
     int ypos;
+    bool flipped = false;
     
 private:
     

@@ -16,6 +16,11 @@ GameObject::~GameObject()
     
 }
 
+void GameObject::Flipped(bool a)
+{
+    flipped = a;
+}
+
 void GameObject::ChangeX(bool x)
 {
     if(x)
